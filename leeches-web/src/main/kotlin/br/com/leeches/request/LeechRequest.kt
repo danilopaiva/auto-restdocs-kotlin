@@ -1,10 +1,12 @@
 package br.com.leeches.request
 
-data class LeechRequest(
-        //@field:[NotNull Min(1) Max(100)]
+import javax.validation.constraints.NotNull
+
+class LeechRequest(
+        @field:[NotNull]
         val name: String?,
-        //@field:[Max(500)]
+        @field:[NotNull]
         val description: String?,
-        //@field:[NotNull]
+        @field:[NotNull]
         val stolenMoney: Double?
 )
