@@ -1,8 +1,8 @@
-package br.com.leechers.representation
+package br.com.leeches.representation
 
 import java.time.LocalDateTime
 
-data class LeecherRepresentation(
+data class LeechRepresentation(
         val id: String,
         val name: String?,
         val description: String?,

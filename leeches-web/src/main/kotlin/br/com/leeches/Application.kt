@@ -1,11 +1,11 @@
-package br.com.leechers
+package br.com.leeches
 
-import br.com.leechers.config.ApplicationConfig
+import br.com.leeches.config.ApplicationConfig
 import org.apache.logging.log4j.LogManager
 import org.springframework.boot.SpringApplication
 import java.net.InetAddress
 
-private val logger = LogManager.getLogger("br.com.leechers.Application")
+private val logger = LogManager.getLogger("br.com.leeches.Application")
 
 fun main(args: Array<String>) {
     val app = SpringApplication.run(ApplicationConfig::class.java, *args)
