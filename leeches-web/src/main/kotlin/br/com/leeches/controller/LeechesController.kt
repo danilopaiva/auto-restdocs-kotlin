@@ -1,7 +1,7 @@
-package br.com.leechers.controller
+package br.com.leeches.controller
 
-import br.com.leechers.representation.LeecherRepresentation
-import br.com.leechers.request.LeechersRequest
+import br.com.leeches.representation.LeechRepresentation
+import br.com.leeches.request.LeechRequest
 import org.springframework.http.HttpStatus
 import org.springframework.http.MediaType
 import org.springframework.web.bind.annotation.GetMapping
@@ -17,42 +17,42 @@ import java.util.*
 import javax.validation.Valid
 
 @RestController
-@RequestMapping("/leechers")
-class LeechersController {
+@RequestMapping("/leeches")
+class LeechesController {
 
     companion object {
-        val leechers = hashMapOf<String, LeecherRepresentation>()
+       private val leeches = hashMapOf<String, LeechRepresentation>()
     }
 
 
     @ResponseStatus(HttpStatus.CREATED)
     @ResponseBody
     @PostMapping(produces = [(MediaType.APPLICATION_JSON_VALUE)])
-    fun save(@RequestBody @Valid request: LeechersRequest): LeecherRepresentation {
-        return saveLeecher(request)
+    fun save(@RequestBody @Valid request: LeechRequest): LeechRepresentation {
+        return saveLeech(request)
     }
 
     @ResponseStatus(HttpStatus.OK)
     @ResponseBody
     @GetMapping("/{id}", produces = [(MediaType.APPLICATION_JSON_VALUE)])
-    fun find(@PathVariable("id") id: String): LeecherRepresentation {
-        return Optional.ofNullable(leechers[id])
+    fun find(@PathVariable("id") id: String): LeechRepresentation {
+        return Optional.ofNullable(leeches[id])
                 .orElseThrow {
                     Exception()
                 }
     }
 
-    private fun saveLeecher(request: LeechersRequest): LeecherRepresentation {
+    private fun saveLeech(request: LeechRequest): LeechRepresentation {
         val id = UUID.randomUUID().toString()
-        leechers[id] = LeecherRepresentation(
+        leeches[id] = LeechRepresentation(
                 id = id,
                 name = request.name,
                 description = request.description,
                 stolenMoney = request.stolenMoney,
-                status = "SOLTO!",
+                status = "PRESO!",
                 createAt = LocalDateTime.now()
         )
-        return Optional.ofNullable(leechers[id])
+        return Optional.ofNullable(leeches[id])
                 .orElseThrow {
                     Exception()
                 }

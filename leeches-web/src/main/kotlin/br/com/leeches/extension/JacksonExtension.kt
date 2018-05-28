@@ -1,4 +1,4 @@
-package br.com.leechers.extension
+package br.com.leeches.extension
 
 import com.fasterxml.jackson.annotation.JsonInclude
 import com.fasterxml.jackson.databind.JsonNode

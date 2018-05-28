@@ -1,6 +1,6 @@
-package br.com.leechers.request
+package br.com.leeches.request
 
-data class LeechersRequest(
+data class LeechRequest(
         //@field:[NotNull Min(1) Max(100)]
         val name: String?,
         //@field:[Max(500)]

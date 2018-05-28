@@ -1,4 +1,4 @@
-package br.com.leechers.config
+package br.com.leeches.config
 
 import org.springframework.context.annotation.Configuration
 import org.springframework.context.annotation.Import
