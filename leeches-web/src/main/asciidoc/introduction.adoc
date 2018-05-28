@@ -1,24 +1,9 @@
 == Introduction
-Welcome to the Realwave Member Get Member API Documentation. This API documentation will give enough information about the resources and the supported operations in the current version.
+Welcome to the Leeches API Documentation. This API documentation will give enough information about the resources and the supported operations in the current version.
 This API is following the Restful conventions.
 
 === How to use
 The requests must be done using HTTPS protocol. The interface responds to different methods depending on the required action.
-
-=== Required Headers
-It's necessary to provide the following headers for *all* requests:
-
-|===
-| Header | Description
-
-| `X-Organization-Slug`
-| Organization slug
-
-| `X-Application-Id`
-| Application identifier
-|===
-
-IMPORTANT: The *X-Duplicate-Transaction* header, with *true* value, is sent in response when a transaction has already been executed.
 
 [[http-verbs]]
 === HTTP Methods
