@@ -21,7 +21,7 @@ import javax.validation.Valid
 class LeechesController {
 
     companion object {
-       private val leeches = hashMapOf<String, LeechRepresentation>()
+        private val leeches = hashMapOf<String, LeechRepresentation>()
     }
 
 

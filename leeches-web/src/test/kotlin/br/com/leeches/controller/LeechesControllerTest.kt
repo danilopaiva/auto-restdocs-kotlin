@@ -7,10 +7,6 @@ import br.com.leeches.representation.LeechRepresentation
 import org.junit.Test
 import org.springframework.http.MediaType
 import org.springframework.restdocs.mockmvc.RestDocumentationRequestBuilders
-import org.springframework.restdocs.payload.PayloadDocumentation
-import org.springframework.restdocs.payload.PayloadDocumentation.fieldWithPath
-import org.springframework.restdocs.request.RequestDocumentation.parameterWithName
-import org.springframework.restdocs.request.RequestDocumentation.pathParameters
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers.content
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers.status
@@ -19,23 +15,6 @@ import kotlin.test.assertNotNull
 
 
 class LeechesControllerTest : ControllerBaseTest() {
-
-    companion object {
-        private val requestFields = PayloadDocumentation.requestFields(
-                fieldWithPath("name").description("Leech name"),
-                fieldWithPath("description").description("Leech description"),
-                fieldWithPath("stolenMoney").description("Leech stolen money")
-        )
-
-        private val responseFields = PayloadDocumentation.responseFields(
-                fieldWithPath("id").description("Identify unique the of leech"),
-                fieldWithPath("name").description("Leech name"),
-                fieldWithPath("description").description("Leech description"),
-                fieldWithPath("stolenMoney").description("Leech stolen money"),
-                fieldWithPath("createAt").description("Date of creation"),
-                fieldWithPath("status").description("Status")
-        )
-    }
 
     @Test
     fun `create leech success`() {
@@ -56,7 +35,6 @@ class LeechesControllerTest : ControllerBaseTest() {
                         assertEquals(leech.stolenMoney, stolenMoney)
                     }
                 }
-                .andDo(documentHandler.document(requestFields, responseFields))
     }
 
     @Test
@@ -73,11 +51,5 @@ class LeechesControllerTest : ControllerBaseTest() {
                         assertEquals(leechId, id)
                     }
                 }
-                .andDo(
-                        documentHandler.document(
-                                pathParameters(parameterWithName("id").description("ID the of leech")),
-                                responseFields
-                        )
-                )
-    }
+    }   
 }

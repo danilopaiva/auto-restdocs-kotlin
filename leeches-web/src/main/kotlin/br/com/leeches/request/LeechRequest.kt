@@ -1,12 +1,24 @@
 package br.com.leeches.request
 
 import javax.validation.constraints.NotNull
+import javax.validation.constraints.Size
 
 class LeechRequest(
-        @field:[NotNull]
+        /**
+         * Name of leech.
+         */
+        @field:[NotNull Size(min = 1, max = 50)]
         val name: String?,
-        @field:[NotNull]
+
+        /**
+         * Description of leech.
+         */
+        @field:[NotNull Size(min = 1, max = 500)]
         val description: String?,
+
+        /**
+         * Amount of money stolen by the leech.
+         */
         @field:[NotNull]
         val stolenMoney: Double?
 )

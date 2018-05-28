@@ -5,6 +5,17 @@ import br.com.leeches.extension.jsonToObject
 import br.com.leeches.extension.objectToJson
 import br.com.leeches.representation.LeechRepresentation
 import br.com.leeches.request.LeechRequest
+import capital.scalable.restdocs.AutoDocumentation.description
+import capital.scalable.restdocs.AutoDocumentation.methodAndPath
+import capital.scalable.restdocs.AutoDocumentation.pathParameters
+import capital.scalable.restdocs.AutoDocumentation.requestFields
+import capital.scalable.restdocs.AutoDocumentation.requestParameters
+import capital.scalable.restdocs.AutoDocumentation.responseFields
+import capital.scalable.restdocs.AutoDocumentation.section
+import capital.scalable.restdocs.jackson.JacksonResultHandlers.prepareJackson
+import capital.scalable.restdocs.response.ResponseModifyingPreprocessors.limitJsonArrayLength
+import capital.scalable.restdocs.response.ResponseModifyingPreprocessors.replaceBinaryContent
+import com.fasterxml.jackson.databind.ObjectMapper
 import org.junit.Before
 import org.junit.Rule
 import org.junit.runner.RunWith
@@ -12,6 +23,9 @@ import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.context.SpringBootTest
 import org.springframework.http.MediaType
 import org.springframework.restdocs.JUnitRestDocumentation
+import org.springframework.restdocs.cli.CliDocumentation
+import org.springframework.restdocs.http.HttpDocumentation.httpRequest
+import org.springframework.restdocs.http.HttpDocumentation.httpResponse
 import org.springframework.restdocs.mockmvc.MockMvcRestDocumentation.document
 import org.springframework.restdocs.mockmvc.MockMvcRestDocumentation.documentationConfiguration
 import org.springframework.restdocs.mockmvc.RestDocumentationResultHandler
@@ -41,24 +55,51 @@ abstract class ControllerBaseTest {
 
     protected lateinit var mockMvc: MockMvc
 
-    @Rule
-    @JvmField
+    @get:Rule
     var restDocumentation = JUnitRestDocumentation()
 
-    lateinit var documentHandler: RestDocumentationResultHandler
+    @Autowired
+    private lateinit var objectMapper: ObjectMapper
 
     @Before
+    @Throws(Exception::class)
     fun setUp() {
-        this.documentHandler = document("{method-name}",
-                preprocessRequest(prettyPrint()),
-                preprocessResponse(prettyPrint()))
-
         this.mockMvc = MockMvcBuilders
                 .webAppContextSetup(this.context)
-                .apply<DefaultMockMvcBuilder>(documentationConfiguration(this.restDocumentation))
-                .alwaysDo<DefaultMockMvcBuilder>(this.documentHandler)
+                .alwaysDo<DefaultMockMvcBuilder>(prepareJackson(objectMapper))
+                .alwaysDo<DefaultMockMvcBuilder>(commonDocumentation())
+                .apply<DefaultMockMvcBuilder>(documentationConfiguration(restDocumentation)
+                        .uris()
+                        .withScheme("http")
+                        .withHost("localhost")
+                        .withPort(8080)
+                        .and().snippets()
+                        .withDefaults(CliDocumentation.curlRequest(),
+                                httpRequest(),
+                                httpResponse(),
+                                requestFields(),
+                                responseFields(),
+                                pathParameters(),
+                                requestParameters(),
+                                description(),
+                                methodAndPath(),
+                                section()
+                        )
+                )
                 .build()
     }
+
+    private fun commonDocumentation(): RestDocumentationResultHandler {
+        return document("{class-name}/{method-name}",
+                preprocessRequest(),
+                preprocessResponse(
+                        replaceBinaryContent(),
+                        limitJsonArrayLength(objectMapper),
+                        prettyPrint()
+                )
+        )
+    }
+
 
     fun createLeech(leech: LeechRequest = getLeechRequest()) =
             this.mockMvc.perform(post("/leeches")
