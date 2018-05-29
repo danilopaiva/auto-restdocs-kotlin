@@ -5,16 +5,18 @@ import br.com.leeches.extension.jsonToObject
 import br.com.leeches.extension.objectToJson
 import br.com.leeches.representation.LeechRepresentation
 import br.com.leeches.request.LeechRequest
+import capital.scalable.restdocs.AutoDocumentation
 import capital.scalable.restdocs.AutoDocumentation.description
 import capital.scalable.restdocs.AutoDocumentation.methodAndPath
 import capital.scalable.restdocs.AutoDocumentation.pathParameters
 import capital.scalable.restdocs.AutoDocumentation.requestFields
 import capital.scalable.restdocs.AutoDocumentation.requestParameters
 import capital.scalable.restdocs.AutoDocumentation.responseFields
-import capital.scalable.restdocs.AutoDocumentation.section
+import capital.scalable.restdocs.SnippetRegistry
 import capital.scalable.restdocs.jackson.JacksonResultHandlers.prepareJackson
 import capital.scalable.restdocs.response.ResponseModifyingPreprocessors.limitJsonArrayLength
 import capital.scalable.restdocs.response.ResponseModifyingPreprocessors.replaceBinaryContent
+import capital.scalable.restdocs.section.SectionSnippet
 import com.fasterxml.jackson.databind.ObjectMapper
 import org.junit.Before
 import org.junit.Rule
@@ -70,9 +72,6 @@ abstract class ControllerBaseTest {
                 .alwaysDo<DefaultMockMvcBuilder>(commonDocumentation())
                 .apply<DefaultMockMvcBuilder>(documentationConfiguration(restDocumentation)
                         .uris()
-                        .withScheme("http")
-                        .withHost("localhost")
-                        .withPort(8080)
                         .and().snippets()
                         .withDefaults(CliDocumentation.curlRequest(),
                                 httpRequest(),
@@ -83,7 +82,7 @@ abstract class ControllerBaseTest {
                                 requestParameters(),
                                 description(),
                                 methodAndPath(),
-                                section()
+                                buildSection()
                         )
                 )
                 .build()
@@ -98,6 +97,20 @@ abstract class ControllerBaseTest {
                         prettyPrint()
                 )
         )
+    }
+
+    private fun buildSection(): SectionSnippet {
+        return AutoDocumentation.sectionBuilder()
+                .snippetNames(
+                        SnippetRegistry.PATH_PARAMETERS,
+                        SnippetRegistry.HTTP_REQUEST,
+                        SnippetRegistry.REQUEST_PARAMETERS,
+                        SnippetRegistry.REQUEST_FIELDS,
+                        SnippetRegistry.HTTP_RESPONSE,
+                        SnippetRegistry.RESPONSE_FIELDS
+                )
+                .skipEmpty(true)
+                .build()
     }
 
 

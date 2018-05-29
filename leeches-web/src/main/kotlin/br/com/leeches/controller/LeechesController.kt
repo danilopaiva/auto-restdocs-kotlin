@@ -32,6 +32,9 @@ class LeechesController {
         return saveLeech(request)
     }
 
+    /**
+     * @param id ID of the leech.
+     */
     @ResponseStatus(HttpStatus.OK)
     @ResponseBody
     @GetMapping("/{id}", produces = [(MediaType.APPLICATION_JSON_VALUE)])
