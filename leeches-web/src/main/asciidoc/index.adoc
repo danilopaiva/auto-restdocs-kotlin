@@ -6,6 +6,8 @@
 
 include::introduction.adoc[]
 
+== Leech
+
 include::{snippets}/leeches-controller-test/create leech success/auto-section.adoc[]
 
 include::{snippets}/leeches-controller-test/find a leech success/auto-section.adoc[]

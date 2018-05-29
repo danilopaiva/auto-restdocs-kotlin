@@ -2,6 +2,9 @@ package br.com.leeches.representation
 
 import java.time.LocalDateTime
 
+/**
+ * Leech representation
+ */
 data class LeechRepresentation(
         /**
          * Leech identifier

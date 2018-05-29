@@ -3,6 +3,9 @@ package br.com.leeches.request
 import javax.validation.constraints.NotNull
 import javax.validation.constraints.Size
 
+/**
+ * Leech request
+ */
 class LeechRequest(
         /**
          * Name of leech.

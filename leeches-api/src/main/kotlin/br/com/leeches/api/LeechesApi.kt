@@ -14,9 +14,15 @@ import org.springframework.web.bind.annotation.ResponseBody
 import org.springframework.web.bind.annotation.ResponseStatus
 import javax.validation.Valid
 
+/**
+ * Leeches API
+ */
 @RequestMapping("/leeches")
 interface LeechesApi {
 
+    /**
+     * Save leech
+     */
     @ResponseStatus(CREATED)
     @ResponseBody
     @PostMapping(consumes = [APPLICATION_JSON_VALUE], produces = [APPLICATION_JSON_VALUE])

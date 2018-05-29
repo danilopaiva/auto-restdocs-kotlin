@@ -10,6 +10,9 @@ import java.time.LocalDateTime
 import java.util.*
 import javax.validation.Valid
 
+/**
+ * Leeches controller
+ */
 @RestController
 class LeechesController : LeechesApi {
 
