@@ -19,6 +19,7 @@
     </parent>
 
     <modules>
+        <module>leeches-api</module>
         <module>leeches-web</module>
     </modules>
 
@@ -75,6 +76,12 @@
 
     <dependencyManagement>
         <dependencies>
+            <dependency>
+                <groupId>${project.groupId}</groupId>
+                <artifactId>leeches-api</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            
             <!--REST DOCS-->
             <dependency>
                 <groupId>org.springframework.restdocs</groupId>
