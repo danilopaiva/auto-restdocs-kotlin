@@ -1,5 +1,7 @@
 # Auto Rest Docs para Kotlin
 
+[![Build Status](https://travis-ci.org/danilopaiva/auto-restdocs-kotlin.svg?branch=master)](https://travis-ci.org/danilopaiva/auto-restdocs-kotlin)
+
 Projeto criado para estudos do auto rest docs em Kotlin modularizado.
 
 ## Spring REST Docs
