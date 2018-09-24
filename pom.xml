@@ -4,12 +4,12 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>br.com.leeches</groupId>
+    <groupId>com.github.danilopaiva</groupId>
     <artifactId>auto-restdocs-kotlin</artifactId>
     <packaging>pom</packaging>
     <version>1.0.0-SNAPSHOT</version>
 
-    <name>leeches</name>
+    <name>Bank</name>
 
     <parent>
         <groupId>org.springframework.boot</groupId>
@@ -19,8 +19,8 @@
     </parent>
 
     <modules>
-        <module>leeches-api</module>
-        <module>leeches-web</module>
+        <module>bank-api</module>
+        <module>bank-web</module>
     </modules>
 
     <properties>
@@ -78,7 +78,7 @@
         <dependencies>
             <dependency>
                 <groupId>${project.groupId}</groupId>
-                <artifactId>leeches-api</artifactId>
+                <artifactId>bank-api</artifactId>
                 <version>${project.version}</version>
             </dependency>
 
@@ -197,7 +197,8 @@
                         </execution>
                     </executions>
                     <configuration>
-                        <backend>html</backend>
+                        <sourceDirectory>${user.dir}/docs/asciidoc</sourceDirectory>
+                        <backend>html5</backend>
                         <doctype>book</doctype>
                         <sourceHighlighter>highlightjs</sourceHighlighter>
                         <attributes>
@@ -218,8 +219,10 @@
                             </goals>
                             <configuration>
                                 <sourceDirectories>
-                                    <sourceDirectory>${project.basedir}/../leeches-api/src/main/kotlin</sourceDirectory>
-                                    <sourceDirectory>${project.basedir}/src/main/kotlin/br/com/leeches/controller</sourceDirectory>
+                                    <sourceDirectory>${project.basedir}/../bank-api/src/main/kotlin</sourceDirectory>
+                                    <sourceDirectory>
+                                        ${project.basedir}/src/main/kotlin/com/github/danilopaiva/bank/web/controller
+                                    </sourceDirectory>
                                 </sourceDirectories>
                             </configuration>
                         </execution>

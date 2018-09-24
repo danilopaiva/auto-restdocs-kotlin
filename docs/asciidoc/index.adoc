@@ -1,0 +1,13 @@
+= Bank
+:example-caption!:
+:source-highlighter: highlightjs
+:toc: left
+:toclevels: 2
+
+include::introduction.adoc[]
+
+== Customer
+
+include::{snippets}/customer-controller-test/should create a customer/auto-section.adoc[]
+
+include::{snippets}/customer-controller-test/should find a customer already created/auto-section.adoc[]

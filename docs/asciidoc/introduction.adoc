@@ -1,0 +1,58 @@
+== Introduction
+Welcome to the Bank API Documentation. This API documentation will give enough information about the resources and the supported operations in the current version.
+This API is following the Restful conventions.
+
+=== How to use
+The requests must be done using HTTPS protocol. The interface responds to different methods depending on the required action.
+
+[[http-verbs]]
+=== HTTP Methods
+The allowed methods are:
+
+|===
+| Method | Description
+
+| `GET`
+| Used to get information about a resource
+
+| `POST`
+| Used to create a new resource
+
+| `PUT`
+| Used to update an existing resource
+
+| `PATCH`
+| Used to add fields an existing resource
+
+| `DELETE`
+| Used to delete an existing resource
+|===
+
+[[http-status]]
+=== HTTP Codes
+The HTTP codes supported are:
+
+|===
+| Code | Description
+
+| `200 OK`
+| The request was executed with success
+
+| `201 Created`
+| The new resource was created with success
+
+| `204 No Content`
+| No additional information
+
+| `400 Bad Request`
+| Bad Request. Check the response to know detailed information about the error
+
+| `401 Unauthorized`
+| The authorization data is invalid
+
+| `403 Forbidden`
+| The credentials don't have enough privileges to access the resource
+
+| `404 Not Found`
+| The requested resource was not found
+|===
