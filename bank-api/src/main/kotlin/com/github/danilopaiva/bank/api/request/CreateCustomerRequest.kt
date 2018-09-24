@@ -6,7 +6,7 @@ import javax.validation.constraints.Size
 /**
  * Create Customer Request
  */
-class CustomerRequest(
+class CreateCustomerRequest(
     /**
      * Customer Name
      */
@@ -18,22 +18,4 @@ class CustomerRequest(
      */
     @field:NotNull
     val document: DocumentRequest
-) {
-
-    /**
-     * Document Request
-     */
-    class DocumentRequest(
-        /**
-         * Document Type
-         */
-        @field:[NotNull Size(min = 1, max = 500)]
-        val type: String?,
-
-        /**
-         * Document Number
-         */
-        @field:[NotNull]
-        val number: String?
-    )
-}
+)

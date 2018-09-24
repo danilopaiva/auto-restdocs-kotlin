@@ -13,10 +13,12 @@ import capital.scalable.restdocs.response.ResponseModifyingPreprocessors.limitJs
 import capital.scalable.restdocs.response.ResponseModifyingPreprocessors.replaceBinaryContent
 import capital.scalable.restdocs.section.SectionSnippet
 import com.fasterxml.jackson.databind.ObjectMapper
+import com.github.danilopaiva.bank.api.request.CreateCustomerRequest
+import com.github.danilopaiva.bank.api.request.DocumentRequest
+import com.github.danilopaiva.bank.api.request.UpdateCustomerRequest
+import com.github.danilopaiva.bank.api.response.CustomerResponse
 import com.github.danilopaiva.bank.web.extension.jsonToObject
 import com.github.danilopaiva.bank.web.extension.objectToJson
-import com.github.danilopaiva.bank.api.request.CustomerRequest
-import com.github.danilopaiva.bank.api.response.CustomerResponse
 import org.junit.Before
 import org.junit.Rule
 import org.junit.runner.RunWith
@@ -43,6 +45,7 @@ import org.springframework.test.web.servlet.result.MockMvcResultMatchers.status
 import org.springframework.test.web.servlet.setup.DefaultMockMvcBuilder
 import org.springframework.test.web.servlet.setup.MockMvcBuilders
 import org.springframework.web.context.WebApplicationContext
+import java.util.*
 
 
 @WebAppConfiguration
@@ -116,7 +119,7 @@ abstract class ControllerBaseTest {
     }
 
 
-    fun createCustomer(customer: CustomerRequest = dummyCustomerRequest()) =
+    fun createCustomer(customer: CreateCustomerRequest = dummyCreateCustomerRequest()) =
         this.mockMvc.perform(
             post("/customers")
                 .content(customer.objectToJson())
@@ -127,12 +130,24 @@ abstract class ControllerBaseTest {
             .andReturn()
             .response.contentAsString.jsonToObject(CustomerResponse::class.java).id
 
-    fun dummyCustomerRequest() =
-        CustomerRequest(
+    fun dummyCreateCustomerRequest() =
+        CreateCustomerRequest(
             name = "Danilo Paiva",
-            document = CustomerRequest.DocumentRequest(
+            document = DocumentRequest(
                 type = "CNH",
-                number = "123456"
+                number = randomUUID()
             )
         )
+
+    fun dummyUpdateCustomerRequest() =
+        UpdateCustomerRequest(
+            name = "Paiva Danilo",
+            document = DocumentRequest(
+                type = "CNH",
+                number = randomUUID()
+            )
+        )
+
+    fun randomUUID() =
+        UUID.randomUUID().toString()
 }

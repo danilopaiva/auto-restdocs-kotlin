@@ -11,3 +11,7 @@ include::introduction.adoc[]
 include::{snippets}/customer-controller-test/should create a customer/auto-section.adoc[]
 
 include::{snippets}/customer-controller-test/should find a customer already created/auto-section.adoc[]
+
+include::{snippets}/customer-controller-test/should update a customer already created/auto-section.adoc[]
+
+include::{snippets}/customer-controller-test/should delete a customer already created/auto-section.adoc[]

@@ -1,6 +1,7 @@
 package com.github.danilopaiva.bank.api
 
-import com.github.danilopaiva.bank.api.request.CustomerRequest
+import com.github.danilopaiva.bank.api.request.CreateCustomerRequest
+import com.github.danilopaiva.bank.api.request.UpdateCustomerRequest
 import com.github.danilopaiva.bank.api.response.CustomerResponse
 import org.springframework.http.HttpStatus.CREATED
 import org.springframework.http.HttpStatus.NO_CONTENT
@@ -29,7 +30,7 @@ interface CustomerApi {
     @ResponseStatus(CREATED)
     @ResponseBody
     @PostMapping(consumes = [APPLICATION_JSON_VALUE], produces = [APPLICATION_JSON_VALUE])
-    fun create(@RequestBody @Valid request: CustomerRequest): CustomerResponse
+    fun create(@RequestBody @Valid request: CreateCustomerRequest): CustomerResponse
 
     /**
      * @param id Customer Id
@@ -45,7 +46,10 @@ interface CustomerApi {
     @ResponseStatus(OK)
     @ResponseBody
     @PutMapping("/{id}", produces = [APPLICATION_JSON_VALUE])
-    fun update(@PathVariable("id") id: String): CustomerResponse
+    fun update(
+        @PathVariable("id") id: String,
+        @RequestBody @Valid request: UpdateCustomerRequest
+    ): CustomerResponse
 
     /**
      * @param id Customer Id
