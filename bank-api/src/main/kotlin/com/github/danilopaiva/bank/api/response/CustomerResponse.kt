@@ -29,7 +29,7 @@ data class CustomerResponse(
     /**
      * Customer created at
      */
-    val createAt: LocalDateTime
+    val createdAt: LocalDateTime
 ) {
     /**
      * Document Response

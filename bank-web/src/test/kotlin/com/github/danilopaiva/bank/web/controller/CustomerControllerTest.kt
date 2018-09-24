@@ -33,7 +33,7 @@ class CustomerControllerTest : ControllerBaseTest() {
             .andExpect {
                 it.response.contentAsString.jsonToObject(CustomerResponse::class.java).run {
                     assertNotNull(id)
-                    assertNotNull(createAt)
+                    assertNotNull(createdAt)
                     assertNotNull(status)
                     assertEquals(customer.name, name)
                     assertEquals(customer.document.number, document.number)
@@ -50,7 +50,7 @@ class CustomerControllerTest : ControllerBaseTest() {
             .andExpect {
                 it.response.contentAsString.jsonToObject(CustomerResponse::class.java).run {
                     assertNotNull(id)
-                    assertNotNull(createAt)
+                    assertNotNull(createdAt)
                     assertNotNull(status)
                     assertEquals(customerId, id)
                 }
@@ -73,7 +73,7 @@ class CustomerControllerTest : ControllerBaseTest() {
             .andExpect {
                 it.response.contentAsString.jsonToObject(CustomerResponse::class.java).run {
                     assertNotNull(id)
-                    assertNotNull(createAt)
+                    assertNotNull(createdAt)
                     assertNotNull(status)
                     assertEquals(customerId, id)
                     assertNotEquals(customerToCreate.name, name)

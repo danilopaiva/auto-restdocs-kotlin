@@ -50,7 +50,7 @@ class CustomerController : CustomerApi {
                 type = request.document.type,
                 number = request.document.number
             ),
-            createAt = LocalDateTime.now()
+            createdAt = LocalDateTime.now()
         )
         return findCustomer(id)
     }
@@ -70,7 +70,7 @@ class CustomerController : CustomerApi {
                 type = request.document.type,
                 number = request.document.number
             ),
-            createAt = LocalDateTime.now()
+            createdAt = LocalDateTime.now()
         )
 
         return findCustomer(id)
