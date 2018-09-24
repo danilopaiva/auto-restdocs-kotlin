@@ -2,7 +2,9 @@
 
 [![Build Status](https://travis-ci.org/danilopaiva/auto-restdocs-kotlin.svg?branch=master)](https://travis-ci.org/danilopaiva/auto-restdocs-kotlin)
 
-Projeto criado para estudos do auto rest docs em Kotlin modularizado.
+[![codecov](https://codecov.io/gh/danilopaiva/auto-restdocs-kotlin/branch/master/graph/badge.svg)](https://codecov.io/gh/danilopaiva/auto-restdocs-kotlin)
+
+Projeto criado para estudos do auto rest docs em Kotlin modularizado.https://codecov.io/gh/ZupIT/event-sourcing-framework
 
 ## Spring REST Docs
 
