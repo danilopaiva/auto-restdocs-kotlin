@@ -2,10 +2,13 @@ language: java
 jdk:
   - oraclejdk8
 sudo: true
+install:
+  - sudo apt-get install -y linux-image-virtual kernel linux-image-extra-virtual
+  - curl -sSL https://get.docker.com/ | sudo sh
+  - sudo pip install docker-compose
 script:
- - docker-compose up
- - wait 4
- - docker-compose ps
- - mvn clean install
+  - docker-compose up -d postgres
+  - docker-compose ps
+  - mvn clean install
 after_success:
- - bash <(curl -s https://codecov.io/bash)
+  - bash <(curl -s https://codecov.io/bash)
