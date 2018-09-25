@@ -133,8 +133,9 @@ abstract class ControllerBaseTest {
     fun dummyCreateCustomerRequest() =
         CreateCustomerRequest(
             name = "Danilo Paiva",
+            email = "danilopaivasilva@gmail.com",
             document = DocumentRequest(
-                type = "CNH",
+                type = "IDENTITY",
                 number = randomUUID()
             )
         )
@@ -143,7 +144,7 @@ abstract class ControllerBaseTest {
         UpdateCustomerRequest(
             name = "Paiva Danilo",
             document = DocumentRequest(
-                type = "CNH",
+                type = "IDENTITY",
                 number = randomUUID()
             )
         )
