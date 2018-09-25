@@ -3,7 +3,7 @@ package com.github.danilopaiva.bank.domain
 import com.github.danilopaiva.bank.domain.repository.CustomerRepository
 import java.util.*
 
-class Customer(
+data class Customer(
     val id: Id = Id(),
     val name: Name,
     val email: Email,
@@ -12,8 +12,20 @@ class Customer(
 ) {
 
     fun create(repository: CustomerRepository): Customer {
+        //you can create validations
         repository.save(this)
         return this
+    }
+
+    fun update(repository: CustomerRepository): Customer {
+        //you can create validations
+        repository.update(this)
+        return this
+    }
+
+    fun delete(repository: CustomerRepository) {
+        //you can create validations
+        repository.delete(this.id)
     }
 
 

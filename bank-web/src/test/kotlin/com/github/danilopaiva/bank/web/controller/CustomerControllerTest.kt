@@ -1,19 +1,18 @@
 package com.github.danilopaiva.bank.web.controller
 
 import com.github.danilopaiva.bank.api.response.CustomerResponse
+import com.github.danilopaiva.bank.domain.helper.jsonToObject
+import com.github.danilopaiva.bank.domain.helper.objectToJson
 import com.github.danilopaiva.bank.web.config.ControllerBaseTest
-import com.github.danilopaiva.bank.web.extension.jsonToObject
-import com.github.danilopaiva.bank.web.extension.objectToJson
 import org.junit.Test
 import org.springframework.http.MediaType
-import org.springframework.restdocs.mockmvc.RestDocumentationRequestBuilders.delete
-import org.springframework.restdocs.mockmvc.RestDocumentationRequestBuilders.get
-import org.springframework.restdocs.mockmvc.RestDocumentationRequestBuilders.put
+import org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete
+import org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post
+import org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers.content
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers.status
 import kotlin.test.assertEquals
-import kotlin.test.assertNotEquals
 import kotlin.test.assertNotNull
 
 
@@ -40,7 +39,7 @@ class CustomerControllerTest : ControllerBaseTest() {
             }
     }
 
-   /* @Test
+    @Test
     fun `should find a customer already created`() {
         val customerId = createCustomer()
         this.mockMvc.perform(get("/customers/{id}", customerId))
@@ -50,7 +49,6 @@ class CustomerControllerTest : ControllerBaseTest() {
                 it.response.contentAsString.jsonToObject(CustomerResponse::class.java).run {
                     assertNotNull(id)
                     assertNotNull(createdAt)
-                    assertNotNull(status)
                     assertEquals(customerId, id)
                 }
             }
@@ -73,9 +71,10 @@ class CustomerControllerTest : ControllerBaseTest() {
                 it.response.contentAsString.jsonToObject(CustomerResponse::class.java).run {
                     assertNotNull(id)
                     assertNotNull(createdAt)
-                    assertNotNull(status)
                     assertEquals(customerId, id)
-                    assertNotEquals(customerToCreate.name, name)
+                    assertEquals(customerToUpdate.name, name)
+                    assertEquals(customerToUpdate.email, email)
+                    assertEquals(customerToUpdate.document?.number, document.number)
                 }
             }
     }
@@ -85,5 +84,5 @@ class CustomerControllerTest : ControllerBaseTest() {
         val customerId = createCustomer()
         this.mockMvc.perform(delete("/customers/{id}", customerId))
             .andExpect(status().isNoContent)
-    }*/
+    }
 }

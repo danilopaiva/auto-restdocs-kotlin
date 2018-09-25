@@ -16,6 +16,20 @@
             <groupId>${project.groupId}</groupId>
             <artifactId>bank-domain</artifactId>
         </dependency>
+
+        <!--TEST-->
+        <dependency>
+            <groupId>com.nhaarman</groupId>
+            <artifactId>mockito-kotlin-kt1.1</artifactId>
+            <scope>test</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>bank-domain</artifactId>
+            <type>test-jar</type>
+            <scope>test</scope>
+        </dependency>
     </dependencies>
 
 

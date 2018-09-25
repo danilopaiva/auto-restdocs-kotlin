@@ -1,0 +1,13 @@
+version: '2'
+services:
+  postgres:
+    image: postgres:9.6
+    ports:
+      - "5432:5432"
+    environment:
+      - POSTGRES_DB=bank
+      - POSTGRES_USER=user_bank
+      - POSTGRES_PASSWORD=password_bank
+      - MAX_CONNECTIONS=300
+    volumes:
+      - ./docker-compose-postgres.sql:/docker-entrypoint-initdb.d/setup.sql

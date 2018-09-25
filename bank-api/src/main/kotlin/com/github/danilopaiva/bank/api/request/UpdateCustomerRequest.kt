@@ -14,8 +14,14 @@ class UpdateCustomerRequest(
     val name: String?,
 
     /**
+     * Customer Email
+     */
+    @field:[NotNull Size(min = 1, max = 50)]
+    val email: String?,
+
+    /**
      * Customer Document
      */
     @field:NotNull
-    val document: DocumentRequest
+    val document: DocumentRequest?
 )

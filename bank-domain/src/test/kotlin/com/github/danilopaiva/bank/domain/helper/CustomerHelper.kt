@@ -1,6 +1,7 @@
 package com.github.danilopaiva.bank.domain.helper
 
 import com.github.danilopaiva.bank.domain.Customer
+import java.util.*
 
 fun dummyCustomer() =
     Customer(
@@ -11,3 +12,6 @@ fun dummyCustomer() =
             number = Customer.Document.Number("123456")
         )
     )
+
+fun randomUUID() =
+    UUID.randomUUID().toString()

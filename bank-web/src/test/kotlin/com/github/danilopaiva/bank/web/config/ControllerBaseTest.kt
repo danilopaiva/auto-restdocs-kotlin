@@ -17,8 +17,8 @@ import com.github.danilopaiva.bank.api.request.CreateCustomerRequest
 import com.github.danilopaiva.bank.api.request.DocumentRequest
 import com.github.danilopaiva.bank.api.request.UpdateCustomerRequest
 import com.github.danilopaiva.bank.api.response.CustomerResponse
-import com.github.danilopaiva.bank.web.extension.jsonToObject
-import com.github.danilopaiva.bank.web.extension.objectToJson
+import com.github.danilopaiva.bank.domain.helper.jsonToObject
+import com.github.danilopaiva.bank.domain.helper.objectToJson
 import org.junit.Before
 import org.junit.Rule
 import org.junit.runner.RunWith
@@ -142,13 +142,14 @@ abstract class ControllerBaseTest {
 
     fun dummyUpdateCustomerRequest() =
         UpdateCustomerRequest(
-            name = "Paiva Danilo",
+            name = "A A",
+            email = "a@a.com",
             document = DocumentRequest(
                 type = "IDENTITY",
                 number = randomUUID()
             )
         )
 
-    fun randomUUID() =
+    private fun randomUUID() =
         UUID.randomUUID().toString()
 }
