@@ -15,11 +15,13 @@ fun main(args: Array<String>) {
     val port = app.environment.getProperty("server.port")
     val hostAddress = InetAddress.getLocalHost().hostAddress
 
-    logger.info("""|
+    logger.info(
+        """|
                    |------------------------------------------------------------
                    |Application '$applicationName' is running! Access URLs:
                    |   Local:      http://127.0.0.1:$port$contextPath
                    |   External:   http://$hostAddress:$port$contextPath
-                   |------------------------------------------------------------""".trimMargin())
+                   |------------------------------------------------------------""".trimMargin()
+    )
 
 }

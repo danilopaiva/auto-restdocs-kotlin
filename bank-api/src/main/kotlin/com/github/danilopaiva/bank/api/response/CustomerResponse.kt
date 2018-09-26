@@ -14,12 +14,12 @@ data class CustomerResponse(
     /**
      * Customer Name
      */
-    val name: String?,
+    val name: String,
 
     /**
-     * Customer Status
+     * Customer Email
      */
-    val status: String,
+    val email: String,
 
     /**
      * Customer Document

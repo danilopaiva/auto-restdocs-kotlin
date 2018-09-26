@@ -1,4 +1,4 @@
-package com.github.danilopaiva.bank.web.extension
+package com.github.danilopaiva.bank.domain.helper
 
 import com.fasterxml.jackson.annotation.JsonInclude
 import com.fasterxml.jackson.databind.JsonNode

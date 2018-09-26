@@ -1,8 +1,29 @@
 language: java
 jdk:
   - oraclejdk8
+
 sudo: true
+
+services:
+  - docker
+
+install: true
+
+before_script:
+  - sudo service postgresql stop
+
 script:
- - mvn clean install
+  - docker-compose up --build -d postgres
+  - docker-compose ps
+  - mvn clean install
+
 after_success:
- - bash <(curl -s https://codecov.io/bash)
+  - bash <(curl -s https://codecov.io/bash)
+  - docker-compose down
+
+cache:
+  directories:
+  - $HOME/.m2
+
+notifications:
+  email: false
