@@ -21,11 +21,6 @@ class JdbcCustomerRepositoryTest : RepositoryBaseTest() {
         saveACustomer()
     }
 
-    private fun saveACustomer(customer: Customer = dummyCustomer()): Customer.Id {
-        assertEquals(1, repository.save(customer))
-        return customer.id
-    }
-
     @Test
     fun `should find a customer already created`() {
         val customerId = saveACustomer()
@@ -60,5 +55,10 @@ class JdbcCustomerRepositoryTest : RepositoryBaseTest() {
 
         val customerFound = repository.find(customerId)
         assertNull(customerFound)
+    }
+
+    private fun saveACustomer(customer: Customer = dummyCustomer()): Customer.Id {
+        assertEquals(1, repository.save(customer))
+        return customer.id
     }
 }

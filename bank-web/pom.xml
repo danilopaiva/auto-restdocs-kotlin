@@ -66,6 +66,13 @@
             <groupId>capital.scalable</groupId>
             <artifactId>spring-auto-restdocs-core</artifactId>
         </dependency>
+
+        <dependency>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>bank-domain</artifactId>
+            <type>test-jar</type>
+            <scope>test</scope>
+        </dependency>
     </dependencies>
 
     <build>

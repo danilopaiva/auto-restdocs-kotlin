@@ -1,9 +1,14 @@
 package com.github.danilopaiva.bank.web.helper
 
+import com.github.danilopaiva.bank.api.request.CreateAccountRequest
 import com.github.danilopaiva.bank.api.request.CreateCustomerRequest
+import com.github.danilopaiva.bank.api.request.UpdateAccountRequest
 import com.github.danilopaiva.bank.api.request.UpdateCustomerRequest
+import com.github.danilopaiva.bank.command.CreateAccount
 import com.github.danilopaiva.bank.command.CreateCustomer
+import com.github.danilopaiva.bank.command.UpdateAccount
 import com.github.danilopaiva.bank.command.UpdateCustomer
+import com.github.danilopaiva.bank.domain.Account
 import com.github.danilopaiva.bank.domain.Customer
 
 fun CreateCustomerRequest.toCommand() =
@@ -25,4 +30,16 @@ fun UpdateCustomerRequest.toCommand(id: Customer.Id) =
             number = Customer.Document.Number(this.document!!.number!!)
         ),
         email = Customer.Email(this.email!!)
+    )
+
+fun CreateAccountRequest.toCommand() =
+    CreateAccount(
+        customerId = Customer.Id(this.customerId!!),
+        type = enumValueOf(this.type!!)
+    )
+
+fun UpdateAccountRequest.toCommand(id: Account.Id) =
+    UpdateAccount(
+        id = id,
+        status = enumValueOf(this.status!!)
     )

@@ -13,12 +13,17 @@ import capital.scalable.restdocs.response.ResponseModifyingPreprocessors.limitJs
 import capital.scalable.restdocs.response.ResponseModifyingPreprocessors.replaceBinaryContent
 import capital.scalable.restdocs.section.SectionSnippet
 import com.fasterxml.jackson.databind.ObjectMapper
+import com.github.danilopaiva.bank.api.request.CreateAccountRequest
 import com.github.danilopaiva.bank.api.request.CreateCustomerRequest
 import com.github.danilopaiva.bank.api.request.DocumentRequest
+import com.github.danilopaiva.bank.api.request.UpdateAccountRequest
 import com.github.danilopaiva.bank.api.request.UpdateCustomerRequest
+import com.github.danilopaiva.bank.api.response.AccountResponse
 import com.github.danilopaiva.bank.api.response.CustomerResponse
+import com.github.danilopaiva.bank.domain.Account
 import com.github.danilopaiva.bank.domain.helper.jsonToObject
 import com.github.danilopaiva.bank.domain.helper.objectToJson
+import com.github.danilopaiva.bank.domain.helper.randomUUID
 import org.junit.Before
 import org.junit.Rule
 import org.junit.runner.RunWith
@@ -45,7 +50,6 @@ import org.springframework.test.web.servlet.result.MockMvcResultMatchers.status
 import org.springframework.test.web.servlet.setup.DefaultMockMvcBuilder
 import org.springframework.test.web.servlet.setup.MockMvcBuilders
 import org.springframework.web.context.WebApplicationContext
-import java.util.*
 
 
 @WebAppConfiguration
@@ -130,6 +134,17 @@ abstract class ControllerBaseTest {
             .andReturn()
             .response.contentAsString.jsonToObject(CustomerResponse::class.java).id
 
+    fun createAccount(accountRequest: CreateAccountRequest = dummyCreateAccountRequest(createCustomer())) =
+        this.mockMvc.perform(
+            post("/accounts")
+                .content(accountRequest.objectToJson())
+                .contentType(MediaType.APPLICATION_JSON_UTF8)
+        )
+            .andExpect(status().isCreated)
+            .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8))
+            .andReturn()
+            .response.contentAsString.jsonToObject(AccountResponse::class.java).id
+
     fun dummyCreateCustomerRequest() =
         CreateCustomerRequest(
             name = "Danilo Paiva",
@@ -150,6 +165,14 @@ abstract class ControllerBaseTest {
             )
         )
 
-    private fun randomUUID() =
-        UUID.randomUUID().toString()
+    fun dummyCreateAccountRequest(customerId: String = randomUUID()) =
+        CreateAccountRequest(
+            customerId = customerId,
+            type = "CURRENT"
+        )
+
+    fun dummyUpdateAccountRequest(status: Account.Status = Account.Status.CLOSED) =
+        UpdateAccountRequest(
+            status = status.name
+        )
 }
