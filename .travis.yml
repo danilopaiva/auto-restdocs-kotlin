@@ -6,15 +6,14 @@ sudo: true
 
 services:
   - docker
-  - postgres
 
 install: true
 
-before_install:
-  - docker-compose up --build -d postgres
+before_script:
+  - sudo service postgresql stop
 
 script:
-  - docker-compose up -d
+  - docker-compose up --build -d postgres
   - docker-compose ps
   - mvn clean install
 
@@ -25,3 +24,6 @@ after_success:
 cache:
   directories:
   - $HOME/.m2
+
+notifications:
+  email: false
