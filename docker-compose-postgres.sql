@@ -11,7 +11,7 @@ create table if not exists account(
   customer_id text not null,
   type  text,
   status  text,
-  amount  money not null,
+  amount  decimal not null,
   created_at  timestamp not null,
   primary key (id, customer_id),
   constraint customer_id_fk foreign key (customer_id)
