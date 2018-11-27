@@ -21,7 +21,7 @@ import javax.validation.Valid
 /**
  * Customer API
  */
-@RequestMapping("/customers")
+@RequestMapping("/customers", produces = [APPLICATION_JSON_VALUE])
 interface CustomerApi {
 
     /**
@@ -29,7 +29,7 @@ interface CustomerApi {
      */
     @ResponseStatus(CREATED)
     @ResponseBody
-    @PostMapping(consumes = [APPLICATION_JSON_VALUE], produces = [APPLICATION_JSON_VALUE])
+    @PostMapping(consumes = [APPLICATION_JSON_VALUE])
     fun create(@RequestBody @Valid request: CreateCustomerRequest): CustomerResponse
 
     /**
@@ -37,7 +37,7 @@ interface CustomerApi {
      */
     @ResponseStatus(OK)
     @ResponseBody
-    @GetMapping("/{id}", produces = [APPLICATION_JSON_VALUE])
+    @GetMapping("/{id}")
     fun find(@PathVariable("id") id: String): CustomerResponse
 
     /**
@@ -45,7 +45,7 @@ interface CustomerApi {
      */
     @ResponseStatus(OK)
     @ResponseBody
-    @PutMapping("/{id}", produces = [APPLICATION_JSON_VALUE])
+    @PutMapping("/{id}")
     fun update(
         @PathVariable("id") id: String,
         @RequestBody @Valid request: UpdateCustomerRequest
@@ -56,6 +56,6 @@ interface CustomerApi {
      */
     @ResponseStatus(NO_CONTENT)
     @ResponseBody
-    @DeleteMapping("/{id}", produces = [APPLICATION_JSON_VALUE])
+    @DeleteMapping("/{id}")
     fun delete(@PathVariable("id") id: String)
 }

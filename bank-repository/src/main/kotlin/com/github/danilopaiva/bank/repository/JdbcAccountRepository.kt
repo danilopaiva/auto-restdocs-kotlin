@@ -57,4 +57,8 @@ open class JdbcAccountRepository(private val jdbcTemplate: JdbcTemplate) : Accou
             id.value
         )
     }
+
+    override fun update(id: Account.Id, amount: Account.Amount): Int {
+        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    }
 }

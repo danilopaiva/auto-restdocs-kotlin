@@ -9,4 +9,6 @@ interface AccountRepository {
     fun find(id: Account.Id): Account?
 
     fun update(id: Account.Id, status: Account.Status): Int
+
+    fun update(id: Account.Id, amount: Account.Amount): Int
 }

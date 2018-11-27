@@ -10,6 +10,6 @@ class UpdateAccountRequest(
     /**
      * Status to update the account
      */
-    @field:[NotNull Size(min = 1, max = 50)]
+    @field:[NotNull Size(min = 1, max = 50)] //TODO UPDATE TO PARTNER
     val status: String?
 )
