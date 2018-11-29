@@ -302,6 +302,21 @@
         </pluginManagement>
     </build>
 
+    <scm>
+        <connection>scm:git:https://github.com/danilopaiva/auto-restdocs-kotlin.git</connection>
+        <url>https://github.com/danilopaiva/auto-restdocs-kotlin.git</url>
+        <developerConnection>scm:git:https://github.com/danilopaiva/auto-restdocs-kotlin.git</developerConnection>
+        <tag>HEAD</tag>
+    </scm>
+
+    <distributionManagement>
+        <repository>
+            <id>central</id>
+            <name>zup-releases</name>
+            <url>https://zup.jfrog.io/zup/libs-release</url>
+        </repository>
+    </distributionManagement>
+
     <pluginRepositories>
         <pluginRepository>
             <id>jcenter</id>
