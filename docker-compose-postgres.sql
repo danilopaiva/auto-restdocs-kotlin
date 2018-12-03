@@ -18,3 +18,15 @@ create table if not exists account(
     references customer (id) match simple
     on update no action on delete no action
 );
+
+create table if not exists operation(
+  id  text primary key,
+  account_id text not null,
+  type  text,
+  value  decimal not null,
+  to_account_id text,
+  status  text not null,
+  created_at  timestamp not null,
+  fail_reason text,
+  completed_at  timestamp
+);

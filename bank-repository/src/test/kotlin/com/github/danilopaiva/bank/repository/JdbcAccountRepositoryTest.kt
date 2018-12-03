@@ -2,25 +2,13 @@ package com.github.danilopaiva.bank.repository
 
 import com.github.danilopaiva.bank.domain.Account
 import com.github.danilopaiva.bank.domain.Customer
-import com.github.danilopaiva.bank.domain.helper.dummyAccount
-import com.github.danilopaiva.bank.domain.helper.dummyCustomer
-import com.github.danilopaiva.bank.domain.repository.AccountRepository
-import com.github.danilopaiva.bank.domain.repository.CustomerRepository
 import com.github.danilopaiva.bank.repository.config.RepositoryBaseTest
 import org.junit.Before
 import org.junit.Test
-import org.springframework.beans.factory.annotation.Autowired
 import kotlin.test.assertEquals
-import kotlin.test.assertNotEquals
 import kotlin.test.assertNotNull
 
 class JdbcAccountRepositoryTest : RepositoryBaseTest() {
-
-    @Autowired
-    private lateinit var repository: AccountRepository
-
-    @Autowired
-    private lateinit var customerRepository: CustomerRepository
 
     private lateinit var customerId: Customer.Id
     private lateinit var accountId: Account.Id
@@ -38,7 +26,7 @@ class JdbcAccountRepositoryTest : RepositoryBaseTest() {
 
     @Test
     fun `should find a customer already created`() {
-        val account = repository.find(accountId)
+        val account = accountRepository.find(accountId)
         assertNotNull(account)
         assertEquals(accountId.value, account?.id?.value)
     }
@@ -46,21 +34,20 @@ class JdbcAccountRepositoryTest : RepositoryBaseTest() {
     @Test
     fun `should update the status the account already created`() {
         val status = Account.Status.CLOSED
-        assertEquals(1, repository.update(accountId, status))
+        assertEquals(1, accountRepository.update(accountId, status))
 
-        val account = repository.find(accountId)
+        val account = accountRepository.find(accountId)
         assertNotNull(account)
         assertEquals(status, account?.status)
     }
 
-    private fun saveACustomer(customer: Customer = dummyCustomer()): Customer.Id {
-        assertEquals(1, customerRepository.save(customer))
-        return customer.id
-    }
+    @Test
+    fun `should update the amount the account`() {
+        val amount = Account.Amount(500.0)
+        assertEquals(1, accountRepository.update(accountId, amount))
 
-    private fun saveAnAccount(customerId: Customer.Id = Customer.Id()): Account.Id {
-        val account = dummyAccount(customerId = customerId)
-        assertEquals(1, repository.save(account))
-        return account.id
+        val account = accountRepository.find(accountId)
+        assertNotNull(account)
+        assertEquals(amount.value, account?.amount?.value)
     }
 }

@@ -23,3 +23,5 @@ include::{snippets}/account-controller-test/should create a account/auto-section
 include::{snippets}/account-controller-test/should find a account already created/auto-section.adoc[]
 
 include::{snippets}/account-controller-test/should close a account already created and without amount/auto-section.adoc[]
+
+include::{snippets}/account-controller-test/should to do a deposit/auto-section.adoc[]
