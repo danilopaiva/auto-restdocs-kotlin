@@ -31,8 +31,9 @@ class Account(
         amount: Account.Amount
     ): Operation {
         verifyIfAccountIsActive()
-        repository.update(this.id, amount)
-        this.amount = amount
+        repository.update(id, amount)
+        this.amount = this.amount + amount
+        return createOperation(operationRepository, amount)
     }
 
     fun withdraw(repository: AccountRepository, amountWithdraw: Account.Amount) {
@@ -54,6 +55,15 @@ class Account(
         }
     }
 
+    private fun createOperation(operationRepository: OperationRepository, amount: Account.Amount): Operation {
+        return Operation(
+            accountId = id,
+            value = Operation.Value(amount.value),
+            type = Operation.Type.DEPOSIT,
+            status = Operation.Status.SUCCESS
+        ).create(operationRepository)
+    }
+
     class Id(val value: String = UUID.randomUUID().toString())
 
     enum class Type {
@@ -66,7 +76,7 @@ class Account(
         CLOSED
     }
 
-    class Amount(val value: Double) {
+    data class Amount(val value: Double) {
         fun withdraw(amount: Account.Amount): Account.Amount {
             return Amount(this.value - amount.value)
         }
@@ -78,5 +88,8 @@ class Account(
                 Amount(INITIAL_BALANCE)
 
         }
+
+        operator fun plus(amount: Amount): Amount =
+            Amount(value + amount.value)
     }
 }

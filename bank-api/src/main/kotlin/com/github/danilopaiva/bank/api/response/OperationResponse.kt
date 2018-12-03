@@ -1,10 +1,12 @@
 package com.github.danilopaiva.bank.api.response
 
+import com.fasterxml.jackson.annotation.JsonInclude
 import java.time.LocalDateTime
 
 /**
  *  Operation Response
  */
+@JsonInclude(JsonInclude.Include.NON_NULL)
 class OperationResponse(
     /**
      * Operation id

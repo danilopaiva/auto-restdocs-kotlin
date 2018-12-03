@@ -273,7 +273,7 @@
                                 <sourceDirectories>
                                     <sourceDirectory>${project.basedir}/../bank-api/src/main/kotlin</sourceDirectory>
                                     <sourceDirectory>
-                                        ${project.basedir}/src/main/kotlin/com/github/danilopaiva/bank/web/controller
+                                        ${project.basedir}/src/main/kotlin/com/github/danilopaiva/bank/application/controller
                                     </sourceDirectory>
                                 </sourceDirectories>
                             </configuration>

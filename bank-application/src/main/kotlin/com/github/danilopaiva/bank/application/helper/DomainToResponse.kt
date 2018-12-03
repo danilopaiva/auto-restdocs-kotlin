@@ -42,5 +42,5 @@ fun Operation.toResponse() =
         accountId = accountId.value,
         toAccountId = toAccountId?.value,
         createdAt = createdAt.value,
-        failReason = failReason.value
+        failReason = failReason?.value
     )

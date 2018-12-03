@@ -3,11 +3,11 @@ package com.github.danilopaiva.bank.application.controller
 import com.github.danilopaiva.bank.api.request.ValueRequest
 import com.github.danilopaiva.bank.api.response.AccountResponse
 import com.github.danilopaiva.bank.api.response.OperationResponse
+import com.github.danilopaiva.bank.application.config.ControllerBaseTest
 import com.github.danilopaiva.bank.domain.Account
+import com.github.danilopaiva.bank.domain.Operation
 import com.github.danilopaiva.bank.domain.helper.jsonToObject
 import com.github.danilopaiva.bank.domain.helper.objectToJson
-import com.github.danilopaiva.bank.application.config.ControllerBaseTest
-import com.github.danilopaiva.bank.domain.Operation
 import org.junit.Test
 import org.springframework.http.MediaType
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get

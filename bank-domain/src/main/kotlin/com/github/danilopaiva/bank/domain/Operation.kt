@@ -1,18 +1,23 @@
 package com.github.danilopaiva.bank.domain
 
+import com.github.danilopaiva.bank.domain.repository.OperationRepository
 import java.time.LocalDateTime
 import java.util.*
 
 class Operation(
     val id: Id = Id(),
     val accountId: Account.Id,
-    val toAccountId: Account.Id? = null,
+    var type: Type,
     val value: Value,
-    val status: Status,
-    val createdAt: CreatedAt = CreatedAt(LocalDateTime.now())
+    val toAccountId: Account.Id? = null,
+    val status: Status = Status.PROCESSING,
+    val createdAt: CreatedAt = CreatedAt(LocalDateTime.now()),
+    var failReason: FailReason? = null
 ) {
-    lateinit var type: Type
-    lateinit var failReason: FailReason
+    fun create(operationRepository: OperationRepository): Operation {
+        operationRepository.save(this)
+        return this
+    }
 
     class Id(val value: String = UUID.randomUUID().toString())
 

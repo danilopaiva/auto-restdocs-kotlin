@@ -59,6 +59,13 @@ open class JdbcAccountRepository(private val jdbcTemplate: JdbcTemplate) : Accou
     }
 
     override fun update(id: Account.Id, amount: Account.Amount): Int {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        val sql = """
+            update $TABLE_NAME set $AMOUNT_COLUMN = ? where $ID_COLUMN = ?
+            """
+        return jdbcTemplate.update(
+            sql,
+            amount.value,
+            id.value
+        )
     }
 }
